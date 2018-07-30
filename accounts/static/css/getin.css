@@ -1,0 +1,15 @@
+h1{
+    font-size: 35px;
+}
+
+#IETEhub{
+    font-weight: 700;
+    font-style: italic;
+    color: blueviolet;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn-primary{
+    background-color: blueviolet;
+    border-color: blueviolet;
+}
