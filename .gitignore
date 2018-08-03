@@ -5,6 +5,7 @@ __pycache__/
 
 .vscode/
 myvenv/
+manage.py
 
 # C extensions
 *.so

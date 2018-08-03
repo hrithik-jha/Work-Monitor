@@ -8,7 +8,7 @@ class Meeting(models.Model):
     url = models.TextField()
     venue = models.TextField()
     attendance = models.IntegerField()
-    member = models.ForeignKey(User, on_delete = models.CASCADE)
+    member = models.ForeignKey(User, on_delete = models.CASCADE, default = 1)
 
     def __str__(self):
         return self.title
