@@ -25,7 +25,7 @@ SECRET_KEY = 'e)k&yfz9f10=oiss*zlszux4ayds=xnq-+f2ufqe85h(io511h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'meetings.apps.MeetingsConfig',
     'accounts.apps.AccountsConfig',
+    'chat.apps.ChatConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
