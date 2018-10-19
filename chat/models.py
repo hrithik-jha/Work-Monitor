@@ -1,8 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import User
 
-class ChatRoom(models.Model):
-    name = models.CharField(max_length = 200)
+class Text(models.Model):
+    text = models.CharField(max_length = 200)
+    time = models.DateTimeField()
 
     def __unicode__(self):
         return self.name
+
+    def meet_date_pretty(self):
+        return self.meet_date.strftime('%b %e %Y')

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<style>
+
+h3 {
+    font-size: 15px;
+}
+
+</style>
+
+<h1>Text Chat</h1>
+<br/>
+<h3>Enter chat and hit 'Enter'</h3>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div>
+        <input id=input name="text" placeholder="Your Message..." />
+    </div>
+
+</form>
+
+Chat Output
+<div id=box></div>
+
+<script src=http://cdn.pubnub.com/pubnub.min.js></script>
+<script>(function(){
+var pubnub = PUBNUB.init({publish_key:'pub-c-10b50783-a673-4d42-ae70-f21799d1e62e',subscribe_key:'sub-c-f8d2d51e-b3fc-11e8-ad72-c224feb21010',ssl:true});
+var box = PUBNUB.$('box'), input = PUBNUB.$('input'), channel = 'chat';
+pubnub.subscribe({
+    channel  : channel,
+    callback : function(text) { box.innerHTML = (''+text).replace( /[<>]/g, '' ) + '<br>' + box.innerHTML }
+});
+PUBNUB.bind( 'keyup', input, function(e) {
+    (e.keyCode || e.charCode) === 13 && pubnub.publish({
+        channel : channel, message : input.value, x : (input.value='')
+    })
+} )
+})()</script>
+
+
+{% endblock %}

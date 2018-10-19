@@ -60,57 +60,6 @@
         else phone.dial(form.number.value);
         return false;
     }   
-    /*
-    var video_out = document.getElementById("vid-box");
-    var vid_thumb = document.getElementById("vid-thumb");
-
-    function login(form) {
-	var phone = window.phone = PHONE({
-	    number        : form.username.value || "Anonymous", // listen on username line else Anonymous
-	    publish_key   : 'pub-c-10b50783-a673-4d42-ae70-f21799d1e62e',
-	    subscribe_key : 'sub-c-f8d2d51e-b3fc-11e8-ad72-c224feb21010',
-	});	
-	var ctrl = window.ctrl = CONTROLLER(phone);
-	ctrl.ready(function(){
-        form.username.style.background="#55ff5b";   // Turn input green
-	    form.login_submit.hidden="true";	        // Hide login button
-	    ctrl.addLocalStream(vid_thumb);		        // Place local stream in div
-    });				                                // Called when ready to receive call
-	ctrl.receive(function(session){
-		session.connected(function(session){ video_out.appendChild(session.video); }); // New Call
-	    session.ended(function(session){ctrl.getVideoElement(session.number).remove();});    // Call Ended
-	});	
-    ctrl.videoToggled(function(session, isEnabled){
-		ctrl.getVideoElement(session.number).toggle(isEnabled); // Hide video is stream paused
-	});
-	ctrl.audioToggled(function(session, isEnabled){
-		ctrl.getVideoElement(session.number).css("opacity",isEnabled ? 1 : 0.75); // 0.75 opacity is audio muted
-    });
-    return false;
-    }
-
-    function makeCall(form){
-	    if (!window.phone) alert("Login First!");
-	    var num = form.number.value;
-	    if (phone.number()==num) return false; // No calling yourself!
-	    ctrl.isOnline(num, function(isOn){		// Check if other user is listening for calls
-		    if (isOn) {
-                ctrl.dial(num);
-                ctrl.receive();
-                console.log(num, phone.number);
-                }		// Dial if they are online
-		    else {
-                ctrl.dial(num);
-                console.log(num, phone.number);}	// Alert if not
-	    });
-	return false; // So form does not submit
-    }
-
-
-    function end(){
-        ctrl.hangup();
-    }
-    */
     </script>
 
 </body>
