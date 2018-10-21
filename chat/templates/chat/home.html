@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="{% static 'css/getin.css' %}">-->
+</head>
+
+<body>
+    <div class="container">
+        <h1>
+            Video Call.
+        </h1>
+
+        
+        
+        <div id="vid-box"></div>
+        <!--<div id="vid-thumb"></div>-->
+
+        <form name="loginForm" id="login" action="#" onsubmit="return login(this);">
+            <input type="text" name="username" id="username" placeholder="Pick a username!" />
+            <input type="submit" name="login_submit" value="Log In">
+        </form>
+
+
+        <form name="callForm" id="call" action="#" onsubmit="return makeCall(this);">
+        	<input type="text" name="number" placeholder="Enter user to dial!" />
+        	<input type="submit" value="Call"/>
+        </form>
+        
+        
+        <div id="inCall">
+        	<button id="end" onclick="end()">End</button>
+        </div>
+        
+    </div>
+
+    <script>
+    var video_out = document.getElementById("vid-box");
+
+    function login(form){
+        var phone = window.phone = PHONE({
+            number        : form.username.value || "Anonymous", // listen on username line else Anonymous
+            publish_key   : 'pub-c-10b50783-a673-4d42-ae70-f21799d1e62e',
+            subscribe_key : 'sub-c-f8d2d51e-b3fc-11e8-ad72-c224feb21010',
+        }); 
+        phone.ready(function(){ form.username.style.background="#55ff5b"; });
+        phone.receive(function(session){
+            session.connected(function(session) { video_out.appendChild(session.video); });
+            session.ended(function(session) { video_out.innerHTML=''; });
+        });
+        return false;   // So the form does not submit.
+    }
+
+    function makeCall(form){
+        if (!window.phone) alert("Login First!");
+        else phone.dial(form.number.value);
+        return false;
+    }   
+    </script>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+<script src="https://cdn.pubnub.com/pubnub-3.7.14.min.js"></script>
+<script src="https://cdn.pubnub.com/webrtc/webrtc.js"></script>
+<script src="https://cdn.pubnub.com/webrtc/rtc-controller.js"></script>
+
+
+{% endblock %}
