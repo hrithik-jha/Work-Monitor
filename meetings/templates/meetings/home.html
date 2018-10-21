@@ -2,10 +2,46 @@
 
 {% block content %}
 
-Home.
+<style>
+    #meets{
+        border-radius: 8px;
+        box-shadow: 0px 70px 40px -50px rgba(0, 0, 0, 0.2), 0px 3px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    #meets a{
+        text-decoration: none;
+        color: black;
+    }
+</style>
+
+
+<br/>
+<div class="row">
+<div class="col-md-4">
+    <a href="/meetings/create" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Create Meeting</a>
+</div>    
+<div class="col-md-4">
+    <a href="/chat/video" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Video Chat</a>
+</div>
+<div class="col-md-4">
+    <a href="/chat/text" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Text Chat</a>
+</div>
+</div>
+
 <br/> <br/>
-<a href="/meetings/create" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Meeting</a>
-<br/> <br/>
-<a href="/chat/video" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Video Chat</a>
+
+<div class="row">
+{% for meet in meets.all %}
+        <div class="col-md-4" id="meets">
+            <a href="/meetings/{{meet.id}}">
+                <h2>{{meet.title}}</h2>
+            </a>
+            <h3>{{meet.meet_date}}</h3>
+            <h3>{{meet.venue}}</h3>
+
+        </div>
+{% endfor %}
+</div>
+
 
 {% endblock %}
