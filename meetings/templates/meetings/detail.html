@@ -1,7 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<br/>
+<h2> {{ meeting.title }} </h2>
+<h4>by {{ meeting.member }}</h4>
+<br/>
+<h3>
+    {{ meeting.meet_date }}<br/>
+    {{meeting.venue}}
+    <br/><br/>
+    {{meeting.agenda}}
+    <br/><br/>
+    </h3>
 
-{{ meeting.title }}
+    <a href="javascript:{document.getElementById('attend').submit()}">
+        <button class="btn btn-primary btn-lg">Attend</button>
+    </a>
+    
+    <button class="btn btn-primary btn-lg">{{meeting.attendance}}</button>
+
+    <form id="attend" method="POST" action="{% url 'attend' meeting.id %}">
+        {% csrf_token %}
+        <input type="hidden" id="attend">
+    </form>
 
 {% endblock %}
