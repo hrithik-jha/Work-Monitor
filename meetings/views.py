@@ -3,7 +3,12 @@ from django.contrib.auth.decorators import login_required
 from .models import Meeting
 
 def home(request):
+    
+    query = request.GET.get("q")
     meets = Meeting.objects
+    if query:
+        meets = meets.filter(title__icontains=query)
+        
     return render(request, 'meetings/home.html', {'meets':meets})
 
 
